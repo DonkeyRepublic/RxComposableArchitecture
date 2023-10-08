@@ -26,7 +26,8 @@ let package = Package(
             name: "RxComposableArchitecture",
             dependencies: [
                 .product(name: "RxCombine", package: "RxCombine"),
-                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+                .product(name: "CombineSchedulers", package: "combine-schedulers")
             ]
         ),
         .testTarget(

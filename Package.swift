@@ -15,7 +15,7 @@ let package = Package(
             targets: ["RxComposableArchitecture"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/pointfreeco/swift-composable-architecture", exact: "0.32.0"),
+        .package(url: "https://github.com/pointfreeco/swift-composable-architecture", exact: "0.34.0"),
         .package(url: "https://github.com/pointfreeco/combine-schedulers", exact: "0.7.2"), // https://forums.swift.org/t/cannot-find-nsrecursivelock-in-scope/59912
         .package(url: "https://github.com/CombineCommunity/RxCombine.git", from: "2.0.0"),
     ],

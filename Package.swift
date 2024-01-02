@@ -15,9 +15,8 @@ let package = Package(
             targets: ["RxComposableArchitecture"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/pointfreeco/swift-composable-architecture", exact: "0.34.0"),
-        .package(url: "https://github.com/pointfreeco/combine-schedulers", exact: "0.7.2"), // https://forums.swift.org/t/cannot-find-nsrecursivelock-in-scope/59912
-        .package(url: "https://github.com/CombineCommunity/RxCombine.git", from: "2.0.0"),
+        .package(url: "git@github.com:DonkeyRepublic/swift-composable-architecture-refactor.git", .branch("feature/0340_fork")),
+        .package(url: "https://github.com/CombineCommunity/RxCombine.git", from: "2.0.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -26,8 +25,7 @@ let package = Package(
             name: "RxComposableArchitecture",
             dependencies: [
                 .product(name: "RxCombine", package: "RxCombine"),
-                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
-                .product(name: "CombineSchedulers", package: "combine-schedulers")
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture-refactor")
             ]
         ),
         .testTarget(

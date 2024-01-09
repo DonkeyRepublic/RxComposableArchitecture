@@ -41,6 +41,10 @@ extension RxEffect {
             .asObservable()
     }
 
+    public func cancellable(id: AnyHashable, cancelInFlight: Bool = false) -> RxEffect {
+        self.publisher.eraseToEffect().cancellable(id: id, cancelInFlight: cancelInFlight).asObservable()
+    }
+
     public static func fireAndForget(_ work: @escaping () -> Void) -> RxEffect {
         return Effect<Element, Never>.fireAndForget {
             work()

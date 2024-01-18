@@ -16,7 +16,7 @@ let package = Package(
             targets: ["RxComposableArchitecture"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/DonkeyRepublic/swift-composable-architecture-refactor", branch: "feature/0340_fork"),
+        .package(url: "https://github.com/DonkeyRepublic/swift-composable-architecture-refactor", exact: "0.34.1"),
         .package(url: "https://github.com/CombineCommunity/RxCombine.git", from: "2.0.0")
     ],
     targets: [

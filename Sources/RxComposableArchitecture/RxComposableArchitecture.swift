@@ -3,6 +3,7 @@
 
 import ComposableArchitecture
 import Combine
+import Foundation
 import RxCombine
 import RxSwift
 
@@ -31,13 +32,17 @@ extension RxEffect {
             .map { _ in action }
             .publisher
             .eraseToEffect()
-            .cancellable(id: id, cancelInFlight: true)
+            .cancellable(id: id, cancelInFlight: cancelInFlight)
             .asObservable()
     }
 
     public static func cancel(id: AnyHashable) -> RxEffect {
         return Effect<Element, Never>.cancel(id: id)
             .asObservable()
+    }
+
+    public func cancellable(id: AnyHashable, cancelInFlight: Bool = false) -> RxEffect {
+        self.publisher.eraseToEffect().cancellable(id: id, cancelInFlight: cancelInFlight).asObservable()
     }
 
     public static func fireAndForget(_ work: @escaping () -> Void) -> RxEffect {
@@ -51,5 +56,39 @@ extension RxEffect {
         self
             .flatMap { _ in RxEffect<NewOutput>.empty() }
             .catch { _ in .empty() }
+    }
+
+    public static func effect<T>(from rxEffect: RxEffect<T>) -> Effect<T, Error> {
+        Effect(rxEffect.publisher.eraseToEffect())
+    }
+}
+
+extension ViewStore {
+    public var observable: StoreObservable<State> {
+        StoreObservable(self.publisher.asObservable())
+    }
+}
+
+@dynamicMemberLookup
+public struct StoreObservable<State>: InfallibleType {
+    public func asObservable() -> Observable<State> {
+        self.upstream
+    }
+
+    public init(_ upstream: Observable<State>) {
+        self.upstream = upstream
+    }
+
+    public typealias Element = State
+    public let upstream: Observable<State>
+
+    public func subscribe<Observer: ObserverType>(_ observer: Observer) -> Disposable where Observer.Element == Element {
+        upstream.subscribe(observer)
+    }
+
+    public subscript<LocalState: Equatable>(
+        dynamicMember keyPath: KeyPath<State, LocalState>
+    ) -> StoreObservable<LocalState> {
+        .init(self.upstream.map { $0[keyPath: keyPath] } .distinctUntilChanged())
     }
 }

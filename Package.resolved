@@ -50,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/DonkeyRepublic/swift-composable-architecture-refactor",
       "state" : {
-        "branch" : "feature/0.40.0",
-        "revision" : "7e7f0ff7669b0d4b82055c1310ea7e83defcbef4"
+        "revision" : "7e7f0ff7669b0d4b82055c1310ea7e83defcbef4",
+        "version" : "0.40.3"
       }
     },
     {

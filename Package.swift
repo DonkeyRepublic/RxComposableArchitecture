@@ -12,7 +12,7 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "RxComposableArchitecture",
-            type: .dynamic,
+            type: .static,
             targets: ["RxComposableArchitecture"]),
     ],
     dependencies: [

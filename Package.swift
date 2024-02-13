@@ -12,11 +12,13 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "RxComposableArchitecture",
-            type: .dynamic,
+            type: .static,
             targets: ["RxComposableArchitecture"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/DonkeyRepublic/swift-composable-architecture-refactor", exact: "0.40.3"),
+
+        .package(url: "https://github.com/DonkeyRepublic/swift-composable-architecture-refactor", branch: "feature/0.56.0"),
+        .package(url: "https://github.com/pointfreeco/swiftui-navigation", from: "1.0.0"),
         .package(url: "https://github.com/CombineCommunity/RxCombine.git", from: "2.0.0")
     ],
     targets: [

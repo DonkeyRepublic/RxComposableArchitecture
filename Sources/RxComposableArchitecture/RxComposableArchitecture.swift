@@ -36,12 +36,12 @@ extension RxEffect {
             .asObservable()
     }
 
-    public static func cancel(id: AnyHashable) -> RxEffect {
+    public static func cancel(id: some Hashable) -> RxEffect {
         return Effect<Element, Never>.cancel(id: id)
             .asObservable()
     }
 
-    public func cancellable(id: AnyHashable, cancelInFlight: Bool = false) -> RxEffect {
+    public func cancellable(id: some Hashable, cancelInFlight: Bool = false) -> RxEffect {
         self.publisher.eraseToEffect().cancellable(id: id, cancelInFlight: cancelInFlight).asObservable()
     }
 

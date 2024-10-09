@@ -22,7 +22,7 @@ extension Reducer {
 
 extension RxEffect {
     public static func timeout<Action>(
-        id: AnyHashable,
+        id: some Hashable,
         cancelInFlight: Bool = false,
         dueTime: RxTimeInterval,
         action: Action,

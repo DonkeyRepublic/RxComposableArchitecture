@@ -89,6 +89,8 @@ public struct StoreObservable<State>: InfallibleType {
     public subscript<LocalState: Equatable>(
         dynamicMember keyPath: KeyPath<State, LocalState>
     ) -> StoreObservable<LocalState> {
-        .init(self.upstream.map { $0[keyPath: keyPath] } .distinctUntilChanged())
+        .init(self.upstream.map { $0[keyPath: keyPath] }
+            .do(onNext: { print("#@!", $0) })
+            .distinctUntilChanged())
     }
 }
